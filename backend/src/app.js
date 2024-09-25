@@ -1,26 +1,21 @@
 const express= require("express");
-
+const connectDB=require("./config/database.js");
+const {therapistAuth}= require("./middlewares/auth")
 const app= express();
 
-app.get("/user",(req,res)=>{
-    res.send({
-        firstname:"nikhil",
-        lastname:"raj"
-    })
+connectDB()
+ .then(()=>{
+    console.log("database connection established!!")
+    app.listen(3000, ()=>{
+        console.log("server up hai aur daur rha");
+    });
+  })
+ .catch(()=>{
+    console.log("db connection failed");
+ })
+
+app.use("/",(err,req,res,next)=>{
+    if(err){
+        console.log("something went wrong!!!");   
+    }
 })
-
-app.post("/user",(req,res)=>{
-    console.log("save data to db");
-    // write logic to save data to db
-    res.send("data saved sucessfully!!");
-})
-
-app.delete("/user",(req,res)=>{
-    // write logic to take data from db and delete it
-    res.send("user deleted successfully!!!");
-})
-
-
-app.listen(3000, ()=>{
-    console.log("server up hai aur daur rha");
-});

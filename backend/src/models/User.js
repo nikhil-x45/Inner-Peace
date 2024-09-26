@@ -1,24 +1,37 @@
 const mongoose= require("mongoose");
 
 const userSchema= mongoose.Schema({
-    Name:{
-        type:String
-    },
-    age:{
-        type:Number
-    },
-    role: {
-        type:String
-    },
-    phoneNumber:{
-        type:Number
-    },
+    
     email:{
-        type:String
+        type:String,
+        unique:true,
+        required:true,
+        lowercase: true,
+        trim: true,
     },
     password:{
-        type:String
+        type:String,
+        required:true,
     }, 
+    Name:{
+        type:String,
+        required:true,
+        trim:true,
+    },
+    age:{
+        type:Number,
+        min:14,
+        max:120,
+    },
+    userType: {
+        type:String,
+        required:true,
+        enum:["peer","therapist","admin"]
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+      }
 })
 
 const User= mongoose.model("User",userSchema);

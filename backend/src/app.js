@@ -1,7 +1,21 @@
 const express= require("express");
 const connectDB=require("./config/database.js");
-const {therapistAuth}= require("./middlewares/auth")
+const {therapistAuth}= require("./middlewares/auth");
+const User=require("./models/User.js");
 const app= express();
+
+app.use(express.json());
+
+app.post("/signup", async (req,res)=>{
+   
+   const newUser=  User(req.body);
+   try{
+     await newUser.save();
+     res.send( "user registered successfully");
+   }catch(err){
+     res.status(400).send("not able to save user due to",err.msg);
+   }
+})
 
 connectDB()
  .then(()=>{

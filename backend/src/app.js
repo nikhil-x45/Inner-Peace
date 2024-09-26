@@ -16,6 +16,28 @@ app.post("/signup", async (req,res)=>{
      res.status(400).send("not able to save user due to",err.msg);
    }
 })
+app.get("/user",(req,res)=>{
+   
+      if (age && (isNaN(age) || age < 18)) {
+        return res.status(400).json({ error: 'Age must be a number and at least 18' });
+      }
+    
+    try{
+        
+
+    }catch(err){
+        
+    }
+})
+
+app.patch("/user",(req,res)=>{
+    const data= req.body;
+    try{
+
+    }catch(err){
+
+    }
+})
 
 connectDB()
  .then(()=>{

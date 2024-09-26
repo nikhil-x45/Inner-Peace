@@ -10,6 +10,7 @@ const therapistSchema= mongoose.Schema({
         specialization: {
             type:[String],
             required:true,
+            trim:true,
         },
         degree:{
             type:[String],
@@ -28,6 +29,7 @@ const therapistSchema= mongoose.Schema({
         bio:{
             type:String,
             required:true,
+            trim:true,
         },
         availabilitySlots:{
             type: Object,

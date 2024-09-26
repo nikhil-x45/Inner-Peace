@@ -26,13 +26,10 @@ const userSchema= mongoose.Schema({
     userType: {
         type:String,
         required:true,
-        enum:["peer","therapist","admin"]
+        enum:["peer","therapist","admin"],
+        default:"peer",
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-      }
-})
+},{timestamps:true})
 
 const User= mongoose.model("User",userSchema);
 

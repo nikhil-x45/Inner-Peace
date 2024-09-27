@@ -2,18 +2,40 @@ const mongoose= require("mongoose");
 
 const postSchema= mongoose.Schema({
      
-     title:{
+   authorId:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"User",
+   },
+   title:{
         type:String,
         required:true,
      },
-     content:{
+   content:{
         type:String,
         required:true,
      },
-     author:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"User",
-     },
+   isAnonymous:{
+        type:Boolean,
+        required:true,
+        default:false,
+   },
+   Tags:{
+      type:[String],
+    
+   },
+   commentCount: { 
+      type: Number, 
+      default: 0 ,
+   },
+   visibility: {
+       type: String, 
+       enum: ['public', 'group'],
+       default: 'public' ,
+      },
+   groupId: { 
+      type: ObjectId, 
+      ref: 'SupportGroup' 
+   }
 },{timestamps:true});
 
 module.exports= mongoose.model("Post",postSchema);

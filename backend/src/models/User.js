@@ -26,7 +26,7 @@ const userSchema= mongoose.Schema({
     userType: {
         type:String,
         required:true,
-        enum:["peer","therapist","admin"],
+        enum:["peer","therapist","moderators"],
         default:"peer",
     },
 },{timestamps:true})

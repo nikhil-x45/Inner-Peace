@@ -7,6 +7,8 @@ const {validateSignup}= require("./utils/validaton.js");
 const app= express();
 const cookie= require("cookie-parser");
 const jwt = require("jsonwebtoken"); 
+const {userAuth}= require("./middlewares/auth.js")
+
 
 app.use(express.json());
 app.use(cookie());
@@ -65,31 +67,16 @@ app.post("/login", async(req,res)=>{
     }
 });
 
-app.get("/profile",async (req,res)=>{
-   
-    
+app.get("/profile",userAuth, async(req,res)=>{
+   // user authenticated and u got the who is logged in user by auth Middleware!!
     try{
-      // extract cookie and token from request
-       const cookie= req.cookies;
-       const {token}= cookie;
-       console.log("token:",token);
-       if(!token){
-         res.send("Invalid Token!!");
-       }
-       // verify the token 
-       const decodedMessage =jwt.verify(token,"hijek"); 
-       const {userId}=decodedMessage;
-       console.log("logged in user:",userId);
-       const user=  await User.findById(userId); 
-       if(!user){
-         throw new Error("User doesnt exist!!"); 
-       } 
-       console.log("user is:",user);
+       const user=req.user;
        res.send(user);
     }catch(err){
         res.send("kuch to gadbad hai!!")
     }
-})
+});
+
  app.use("/",(req,res)=>{
     res.send("Hii from server");
  })

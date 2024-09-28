@@ -30,7 +30,33 @@ app.post("/signup", async (req,res)=>{
    }catch(err){
      res.status(400).send("not able to save user due to",err.msg);
    }
-})
+});
+
+app.post("/login", async(req,res)=>{
+    // validate the incoming data
+    try{ 
+    validateLoginData(req);
+    // once validated, move ahead
+    const {emailId,password}=req.body;
+    // check if email(user) is present in the db or not
+    const user = await User.find({email:emailId});
+    if(!user){
+      throw new Error("Invalid Credentials!!");
+    }
+    // check the password is correct or not 
+    const isPasswordValid= await bcrypt.compare(password,user.password);
+    if(!isPasswordValid){
+       throw new Error("Invalid Credentials!!")
+    }
+    else{
+      res.send("Login Successful!!!");
+    }
+  }
+    catch(err){
+      res.status(400).send("error:"+err.message);
+    }
+});
+
 app.get("/user",(req,res)=>{
    
       if (age && (isNaN(age) || age < 18)) {

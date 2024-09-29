@@ -55,3 +55,10 @@ exports.login=  async(req,res)=> {
       res.status(400).send("error:"+err.message);
     }
 };
+
+exports.logout= async(req,res)=>{
+     // user comes with a token to logout 
+      res.cookie("token",null,{expires:new Date(Date.now())});
+      res.send("Logged out!!"); 
+     // 
+};

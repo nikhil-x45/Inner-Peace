@@ -30,7 +30,7 @@ const postSchema= mongoose.Schema({
    visibility: {
        type: String, 
        enum: ['public', 'group'],
-       default: 'public' ,
+       default: 'public',
       },
    groupId: { 
       type: ObjectId, 

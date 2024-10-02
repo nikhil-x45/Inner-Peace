@@ -7,5 +7,7 @@ const postRouter= express.Router();
 
 postRouter.post("/posts", userAuth , postController.createPost);
 postRouter.patch('/posts/:postId', userAuth, postController.updatePost);
+postRouter.delete("/posts/:postId",userAuth, postController.deletePost);
 
+postRouter.post("/posts/:postId/comments",userAuth,postController.addComment);
 module.exports =postRouter;

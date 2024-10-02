@@ -16,9 +16,15 @@ const commentSchema= mongoose.Schema({
         required:true,
     },
     supportCount: [{ 
-         type: ObjectId,
+         type: mongoose.Schema.Types.ObjectId,
          ref: 'User' 
     }],
+    parentCommentId :{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Comment",
+        default:null,
+    }
+
 },{timestamps:true});
 
 module.exports= mongoose.model("Comment",commentSchema);

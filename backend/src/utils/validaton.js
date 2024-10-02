@@ -86,5 +86,22 @@ const validatePostUpdate = (data) => {
   
     return Object.keys(errors).length > 0 ? errors : null;
   };
+
+  const validateCommentData = (data) => {
+    let error={};
+      if(!data.content){
+        error.content= "comment cant be empty!";
+      }
+      if(typeof data.content !== String){
+        error.content="content should be string!";
+      }
+      if(data.content.length <3){
+        error.content="please post a longer comment!!";
+      }
+      if(data.content.length >5000){
+        error.content="please post a smaller comment!";
+      }
+      return error;
+  }
   
-module.exports= {validateSignup,validatePostUpdate}; 
+module.exports= {validateSignup,validatePostUpdate,validateCommentData}; 

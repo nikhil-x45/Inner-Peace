@@ -5,6 +5,7 @@ const postSchema= mongoose.Schema({
    authorId:{
       type: mongoose.Schema.Types.ObjectId,
       ref:"User",
+      required:true,
    },
    title:{
         type:String,
@@ -33,7 +34,7 @@ const postSchema= mongoose.Schema({
        default: 'public',
       },
    groupId: { 
-      type: ObjectId, 
+      type: mongoose.Schema.Types.ObjectId, 
       ref: 'SupportGroup' 
    }
 },{timestamps:true});

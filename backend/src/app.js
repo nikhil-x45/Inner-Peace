@@ -15,10 +15,12 @@ app.use(cookie());
 
 // require routers
 const authRouter= require("./routes/auth.js");
-const {profileRouter}=require("./routes/profile.js");
+const profileRouter=require("./routes/profile.js");
+const postRouter= require("./routes/post.js");
 
 app.use("/",authRouter);
-app.use("/",userAuth,profileRouter);
+app.use("/",profileRouter);
+app.use("/",postRouter);
 
 connectDB()
  .then(()=>{

@@ -5,4 +5,4 @@ const profileRouter= express.Router();
 
 profileRouter.get("/profile",profileController.view);
 
-module.exports= {profileRouter};
+module.exports= profileRouter;
